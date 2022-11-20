@@ -1,0 +1,17 @@
+C:\Users\korni\source\repos\lessons\keyboard_prj\bin\Debug\keyboard_prj.exe.config
+C:\Users\korni\source\repos\lessons\keyboard_prj\bin\Debug\keyboard_prj.exe
+C:\Users\korni\source\repos\lessons\keyboard_prj\bin\Debug\keyboard_prj.pdb
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.AssemblyReference.cache
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.SuggestedBindingRedirects.cache
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\MainWindow.g.cs
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\App.g.cs
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj_MarkupCompile.cache
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj_MarkupCompile.lref
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\MainWindow.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.g.resources
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.Properties.Resources.resources
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.GenerateResource.cache
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.CoreCompileInputs.cache
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.exe
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.pdb
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\dictionary_default.baml
