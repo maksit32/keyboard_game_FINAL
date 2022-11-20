@@ -144,8 +144,13 @@ namespace keyboard_prj
         {
             throw new NotImplementedException();
         }
+
         #endregion
 
-       
+        //for menu
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.menu1.Width = this.Width;
+        }
     }
 }

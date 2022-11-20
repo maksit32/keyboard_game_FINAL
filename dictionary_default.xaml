@@ -18,9 +18,35 @@
     <Style TargetType="{x:Type Button}">
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="BorderBrush" Value="{DynamicResource color}"/>
+        <Setter Property="FontSize" Value="15"/>
     </Style>
-    
-    
-    
-    
+    <!--Special buttons using buttons style ="{DynamicResource key(for ex. Controls_buttons)}"-->
+    <Style TargetType="{x:Type Button}" x:Key="Controls_buttons">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="Purple"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="Number_buttons">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="GreenYellow"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="Other_buttons">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="IndianRed"/>
+    </Style>
+
+    <Style TargetType="{x:Type Button}" x:Key="Letter_buttons">
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color}"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="Background" Value="Yellow"/>
+    </Style>
+
 </ResourceDictionary>
