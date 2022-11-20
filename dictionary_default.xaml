@@ -10,8 +10,14 @@
         <Setter Property="Foreground" Value="DarkBlue"/>
     </Style>
     <!--All buttons-->
+    <LinearGradientBrush x:Key="color">
+        <GradientStop Color="Red" Offset="0.0"/>
+        <GradientStop Color="Blue" Offset="0.5"/>
+        <GradientStop Color="Yellow" Offset="1"/>
+    </LinearGradientBrush>
     <Style TargetType="{x:Type Button}">
         <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource color}"/>
     </Style>
     
     
