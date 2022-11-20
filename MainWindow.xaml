@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:keyboard_prj"
         mc:Ignorable="d"
-        Title="Skins program" Height="450" Width="855" WindowStartupLocation="CenterScreen">
+        Title="Skins program" Height="450" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="83"/>
@@ -15,18 +15,19 @@
         <Canvas Grid.Row="0" Background="LightSkyBlue">
             <Menu x:Name="menu1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="855" FontSize="14">
                 <MenuItem Header="Skins" Width="44">
-                    <MenuItem Header="Skin 1" Click="Skin1_Click"></MenuItem>
-                    <MenuItem Header="Skin 2" Click="Skin2_Click_1"></MenuItem>
-                    <MenuItem Header="Skin 3" Click="Skin3_Click_2"></MenuItem>
+                    <MenuItem Header="Skin 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter"></MenuItem>
+                    <MenuItem Header="Skin 2" Click="Skin2_Click_1" x:Name="mi_1" MouseEnter="mi_1_MouseEnter"></MenuItem>
+                    <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter"></MenuItem>
                 </MenuItem>
             </Menu>
             <Label Content="Time left..." HorizontalAlignment="Left" Canvas.Top="27" VerticalAlignment="Top" Width="108" Canvas.Left="10"/>
             <Label Canvas.Left="147" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="25">Speed: 0 char/s</Label>
             <Label HorizontalAlignment="Left" Canvas.Left="329" VerticalAlignment="Top" Canvas.Top="27">Fails: 0</Label>
-            <Label HorizontalAlignment="Left" Canvas.Left="589" VerticalAlignment="Top" Canvas.Top="29">Difficulty: 0</Label>
-            <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="674" Canvas.Top="32" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft"/>
+            <Label HorizontalAlignment="Left" Canvas.Left="540" VerticalAlignment="Center" Canvas.Top="28" x:Name="label_d" Height="24" Width="110"></Label>
+            <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="683" Canvas.Top="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft"/>
             <Button x:Name="Start_b" Canvas.Left="589" Canvas.Top="60" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" MouseEnter="Start_b_MouseEnter" Click="Start_b_Click">Start</Button>
             <Button x:Name="End_b" Canvas.Left="744" Canvas.Top="60" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" MouseEnter="End_b_MouseEnter_1" Click="End_b_Click">End</Button>
+            <Label Canvas.Left="451" Canvas.Top="28" x:Name="label_d_Copy" Content="Difficulty: " HorizontalAlignment="Left" VerticalAlignment="Center" Width="73"/>
 
         </Canvas>
         <Canvas Grid.Row="1" Background="GreenYellow">
