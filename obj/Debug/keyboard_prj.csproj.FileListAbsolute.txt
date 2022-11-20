@@ -14,7 +14,7 @@ C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.G
 C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.CoreCompileInputs.cache
 C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.exe
 C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.pdb
-C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\dictionary_default.baml
-C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\skin1.baml
-C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\skin2.baml
-C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\skin3.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Skins\dictionary_default.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Skins\skin1.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Skins\skin2.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Skins\skin3.baml

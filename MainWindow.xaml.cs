@@ -21,8 +21,6 @@ using System.Windows.Shapes;
 namespace keyboard_prj
 {
 
-
-
     public partial class MainWindow : Window
     {
         public System.Windows.Threading.DispatcherTimer timer1 { get; set; }
@@ -33,7 +31,7 @@ namespace keyboard_prj
             menu1.Width = this.Width;
             //default dictionary
             ResourceDictionary rd = new ResourceDictionary();
-            rd.Source = new Uri("dictionary_default.xaml", UriKind.Relative);
+            rd.Source = new Uri("\\Skins\\dictionary_default.xaml", UriKind.Relative);
             Resources = rd;
             //настройка таймера
             timer1 = new System.Windows.Threading.DispatcherTimer();
@@ -49,17 +47,23 @@ namespace keyboard_prj
         #region [Skins]
         private void Skin1_Click(object sender, RoutedEventArgs e)
         {
-
+            ResourceDictionary rd = new ResourceDictionary();
+            rd.Source = new Uri("\\Skins\\skin1.xaml", UriKind.Relative);
+            Resources = rd;
         }
 
         private void Skin2_Click_1(object sender, RoutedEventArgs e)
         {
-
+            ResourceDictionary rd = new ResourceDictionary();
+            rd.Source = new Uri("\\Skins\\skin2.xaml", UriKind.Relative);
+            Resources = rd;
         }
 
         private void Skin3_Click_2(object sender, RoutedEventArgs e)
         {
-
+            ResourceDictionary rd = new ResourceDictionary();
+            rd.Source = new Uri("\\Skins\\skin3.xaml", UriKind.Relative);
+            Resources = rd;
         }
         #endregion
 
