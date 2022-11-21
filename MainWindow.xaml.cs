@@ -26,6 +26,10 @@ namespace keyboard_prj
     {
         public System.Windows.Threading.DispatcherTimer timer1 { get; set; }
         private int sec;
+        private Random rand = new Random(); //рандом
+        private List<string> list_buttons; //массив клавиш
+        private Result result = new Result { fail = 0, score = 0 };
+
 
         public MainWindow()
         {
@@ -44,6 +48,8 @@ namespace keyboard_prj
             b.ElementName = "slider_d";
             b.Path = new PropertyPath("Value"); // свойство элемента-источника
             label_d.SetBinding(Label.ContentProperty, b);
+
+            create_list();
         }
 
         #region [Skins]
@@ -119,23 +125,27 @@ namespace keyboard_prj
             //в строку
             value = slider_d.Value.ToString();
             //проверка на целое число
-            if(value.Length > 2)
+            if (value.Length > 2)
             {
                 IsNormal = false;
             }
-            else { IsNormal= true; }
+            else { IsNormal = true; }
 
             //включим новый
             if (slider_d.Value > 0 && IsNormal)
             {
                 interval = (int)slider_d.Value - 6;
-                if(interval < 0)
+                if (interval < 0)
                 {
                     interval = -interval;
                 }
                 timer1.Interval = new TimeSpan(0, 0, interval);
                 sec = 20;
-                timer1.Start();
+                var result = MessageBox.Show($"Таймер установлен!{Environment.NewLine}Нажмите OK{Environment.NewLine}Успехов! :)", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (result == MessageBoxResult.OK)
+                {
+                    timer1.Start();
+                }
             }
             else
             {
@@ -157,19 +167,38 @@ namespace keyboard_prj
         private void timer_Tick(object sender, EventArgs e)
         {
             sec--;
-            if(sec < 0)
+            if (sec <= 0)
             {
+                this.text_label.Content = $"Игра окончена :)";
+                this.time_left.Content = $"Time left: 0 sec";
                 timer1.Stop();
+                return;
             }
+            this.text_label.Content = $"Нажмите: {list_buttons[rand.Next(this.list_buttons.Count)]}";
             this.time_left.Content = $"Time left: {sec} sec";
         }
-
         #endregion
 
         //for menu
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.menu1.Width = this.Width;
+        }
+        private void create_list()
+        {
+            this.list_buttons = new List<string>
+            {
+                "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+                "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
+                "Caps lock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
+                "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift",
+                "Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Ctrl"
+            };
+        }
+
+        private void Rules_item_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show($"Игра-тренажер.{Environment.NewLine}С помощью данного тренажера вы сможете улучшить навык обращения с клавиатурой.{Environment.NewLine}Выбирая сложность(difficulty) вы сможете регулировать время, дающееся на нажатие.{Environment.NewLine}10 - 1 секунда, 9 - 2 секунды и т.д.{Environment.NewLine}После успешного нажатия вам начислится score, равный 20.{Environment.NewLine}Если вы ошиблись, очки не начислятся, а отметка fail увеличится на 1", "Правила", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

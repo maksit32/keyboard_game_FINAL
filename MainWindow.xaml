@@ -19,15 +19,17 @@
                     <MenuItem Header="Skin 2" Click="Skin2_Click_1" x:Name="mi_1" MouseEnter="mi_1_MouseEnter"></MenuItem>
                     <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter"></MenuItem>
                 </MenuItem>
+                <MenuItem Header="Rules" x:Name="Rules_item" Click="Rules_item_Click"/>
             </Menu>
             <Label x:Name="time_left" Content="Time left..." HorizontalAlignment="Left" Canvas.Top="27" VerticalAlignment="Center" Width="132" Canvas.Left="10"/>
             <Label Canvas.Left="147" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="25">Speed: 0 char/s</Label>
-            <Label HorizontalAlignment="Left" Canvas.Left="329" VerticalAlignment="Top" Canvas.Top="27">Fails: 0</Label>
+            <Label x:Name="fail_label" HorizontalAlignment="Left" Canvas.Left="329" VerticalAlignment="Top" Canvas.Top="27">Fails: 0</Label>
             <Label HorizontalAlignment="Left" Canvas.Left="540" VerticalAlignment="Center" Canvas.Top="28" x:Name="label_d" Height="24" Width="110"></Label>
             <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="683" Canvas.Top="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft" Maximum="5"/>
             <Button x:Name="Start_b" Canvas.Left="589" Canvas.Top="57" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="Start_b_MouseEnter" Click="Start_b_Click">Start</Button>
             <Button x:Name="End_b" Canvas.Left="744" Canvas.Top="57" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="End_b_MouseEnter_1" Click="End_b_Click">End</Button>
             <Label Canvas.Left="451" Canvas.Top="28" x:Name="label_d_Copy" Content="Difficulty: " HorizontalAlignment="Left" VerticalAlignment="Center" Width="73"/>
+            <Label x:Name="score_label" Canvas.Left="329" Canvas.Top="53" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         </Canvas>
         <Canvas Grid.Row="1" Margin="0,0,0 5" Background="#FFAAFFD1">
@@ -41,6 +43,7 @@
                     </TransformGroup>
                 </TextBox.RenderTransform>
             </TextBox>
+            <Label x:Name="text_label" Content="Клавиши, которые нужно нажать будут отображаться тут." Canvas.Left="332" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="417" Foreground="Red"/>
         </Canvas>
         <Canvas Grid.Row="2" Background="Wheat">
             <Button Content="`" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Other_buttons}"/>
