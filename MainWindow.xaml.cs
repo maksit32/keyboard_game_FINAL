@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Documents.Serialization;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -24,6 +25,7 @@ namespace keyboard_prj
     public partial class MainWindow : Window
     {
         public System.Windows.Threading.DispatcherTimer timer1 { get; set; }
+        private int sec;
 
         public MainWindow()
         {
@@ -108,6 +110,7 @@ namespace keyboard_prj
         {
             string value;
             bool IsNormal = false;
+            int interval;
             //отключим старый
             if (timer1.IsEnabled)
             {
@@ -125,7 +128,13 @@ namespace keyboard_prj
             //включим новый
             if (slider_d.Value > 0 && IsNormal)
             {
-                timer1.Interval = new TimeSpan(0, 0, (int)slider_d.Value);
+                interval = (int)slider_d.Value - 6;
+                if(interval < 0)
+                {
+                    interval = -interval;
+                }
+                timer1.Interval = new TimeSpan(0, 0, interval);
+                sec = 20;
                 timer1.Start();
             }
             else
@@ -141,12 +150,18 @@ namespace keyboard_prj
             {
                 timer1.Stop();
                 MessageBox.Show("Тамер выключен.", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.time_left.Content = $"Time left: 0 sec";
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            sec--;
+            if(sec < 0)
+            {
+                timer1.Stop();
+            }
+            this.time_left.Content = $"Time left: {sec} sec";
         }
 
         #endregion

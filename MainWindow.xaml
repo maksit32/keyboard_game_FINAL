@@ -20,11 +20,11 @@
                     <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter"></MenuItem>
                 </MenuItem>
             </Menu>
-            <Label Content="Time left..." HorizontalAlignment="Left" Canvas.Top="27" VerticalAlignment="Top" Width="108" Canvas.Left="10"/>
+            <Label x:Name="time_left" Content="Time left..." HorizontalAlignment="Left" Canvas.Top="27" VerticalAlignment="Center" Width="132" Canvas.Left="10"/>
             <Label Canvas.Left="147" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="25">Speed: 0 char/s</Label>
             <Label HorizontalAlignment="Left" Canvas.Left="329" VerticalAlignment="Top" Canvas.Top="27">Fails: 0</Label>
             <Label HorizontalAlignment="Left" Canvas.Left="540" VerticalAlignment="Center" Canvas.Top="28" x:Name="label_d" Height="24" Width="110"></Label>
-            <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="683" Canvas.Top="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft"/>
+            <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="683" Canvas.Top="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft" Maximum="5"/>
             <Button x:Name="Start_b" Canvas.Left="589" Canvas.Top="57" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="Start_b_MouseEnter" Click="Start_b_Click">Start</Button>
             <Button x:Name="End_b" Canvas.Left="744" Canvas.Top="57" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="End_b_MouseEnter_1" Click="End_b_Click">End</Button>
             <Label Canvas.Left="451" Canvas.Top="28" x:Name="label_d_Copy" Content="Difficulty: " HorizontalAlignment="Left" VerticalAlignment="Center" Width="73"/>
