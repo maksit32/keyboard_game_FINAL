@@ -29,8 +29,9 @@ namespace keyboard_prj
         private Random rand = new Random(); //рандом
         private List<string> list_buttons; //массив клавиш
         private Result result = new Result { fail = 0, score = 0 };
+        private bool IsPlaying = false;
 
-
+        #region [Construct]
         public MainWindow()
         {
             InitializeComponent();
@@ -52,12 +53,35 @@ namespace keyboard_prj
             create_list();
         }
 
+        //for menu
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.menu1.Width = this.Width;
+        }
+        private void create_list()
+        {
+            this.list_buttons = new List<string>
+            {
+                "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
+                "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
+                "Caps lock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
+                "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift",
+                "Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Ctrl"
+            };
+        }
+
+        #endregion
+
         #region [Skins]
         private void Skin1_Click(object sender, RoutedEventArgs e)
         {
             ResourceDictionary rd = new ResourceDictionary();
             rd.Source = new Uri("\\Skins\\skin1.xaml", UriKind.Relative);
             Resources = rd;
+
+            //меняем background у других
+            mi_1.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
         }
 
         private void Skin2_Click_1(object sender, RoutedEventArgs e)
@@ -65,6 +89,8 @@ namespace keyboard_prj
             ResourceDictionary rd = new ResourceDictionary();
             rd.Source = new Uri("\\Skins\\skin2.xaml", UriKind.Relative);
             Resources = rd;
+            mi_0.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
         }
 
         private void Skin3_Click_2(object sender, RoutedEventArgs e)
@@ -72,6 +98,33 @@ namespace keyboard_prj
             ResourceDictionary rd = new ResourceDictionary();
             rd.Source = new Uri("\\Skins\\skin3.xaml", UriKind.Relative);
             Resources = rd;
+            mi_0.Background = Brushes.White;
+            mi_1.Background = Brushes.White;
+        }
+
+        private async void mi_0_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+            await Task.Delay(1000);
+            mi_0.Background = Brushes.White;
+            mi_1.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
+        }
+
+        private async void mi_1_MouseLeave(object sender, MouseEventArgs e)
+        {
+            await Task.Delay(1000);
+            mi_0.Background = Brushes.White;
+            mi_1.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
+        }
+
+        private async void mi_2_MouseLeave(object sender, MouseEventArgs e)
+        {
+            await Task.Delay(1000);
+            mi_0.Background = Brushes.White;
+            mi_1.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
         }
         #endregion
 
@@ -144,6 +197,7 @@ namespace keyboard_prj
                 var result = MessageBox.Show($"Таймер установлен!{Environment.NewLine}Нажмите OK{Environment.NewLine}Успехов! :)", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 if (result == MessageBoxResult.OK)
                 {
+                    IsPlaying = true;
                     timer1.Start();
                 }
             }
@@ -160,6 +214,7 @@ namespace keyboard_prj
             {
                 timer1.Stop();
                 MessageBox.Show("Тамер выключен.", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                IsPlaying = false;
                 this.time_left.Content = $"Time left: 0 sec";
             }
         }
@@ -171,6 +226,7 @@ namespace keyboard_prj
             {
                 this.text_label.Content = $"Игра окончена :)";
                 this.time_left.Content = $"Time left: 0 sec";
+                IsPlaying = false;
                 timer1.Stop();
                 return;
             }
@@ -179,26 +235,41 @@ namespace keyboard_prj
         }
         #endregion
 
-        //for menu
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            this.menu1.Width = this.Width;
-        }
-        private void create_list()
-        {
-            this.list_buttons = new List<string>
-            {
-                "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
-                "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
-                "Caps lock", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "Enter",
-                "Shift", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/", "Shift",
-                "Ctrl", "Win", "Alt", "Space", "Alt", "Win", "Ctrl"
-            };
-        }
-
         private void Rules_item_Click(object sender, RoutedEventArgs e)
         {
+            var animation = new DoubleAnimation();
+            animation.From = 0;
+            animation.To = 1;
+            animation.Duration = TimeSpan.FromMilliseconds(1000);
+            this.Rules_item.BeginAnimation(OpacityProperty, animation);
             MessageBox.Show($"Игра-тренажер.{Environment.NewLine}С помощью данного тренажера вы сможете улучшить навык обращения с клавиатурой.{Environment.NewLine}Выбирая сложность(difficulty) вы сможете регулировать время, дающееся на нажатие.{Environment.NewLine}10 - 1 секунда, 9 - 2 секунды и т.д.{Environment.NewLine}После успешного нажатия вам начислится score, равный 20.{Environment.NewLine}Если вы ошиблись, очки не начислятся, а отметка fail увеличится на 1", "Правила", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        #region [Game]
+        private void keyboard_game_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (IsPlaying)
+            {
+                if (text_label.Content.ToString().ToLower().Contains(e.Key.ToString().ToLower()))
+                {
+                    result.score += 20;
+                }
+                else
+                {
+                    result.fail++;
+                }
+            }
+        }
+
+        #endregion
+
+        private void Skins_item_Click(object sender, RoutedEventArgs e)
+        {
+            var animation = new DoubleAnimation();
+            animation.From = 0;
+            animation.To = 1;
+            animation.Duration = TimeSpan.FromMilliseconds(1000);
+            this.Skins_item.BeginAnimation(OpacityProperty, animation);
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿<Window x:Class="keyboard_prj.MainWindow"
+﻿<Window x:Name="keyboard_game" x:Class="keyboard_prj.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:keyboard_prj"
         mc:Ignorable="d"
-        Title="Skins program" Height="435" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="435" SizeChanged="Window_SizeChanged">
+        Title="Keyboard game" Height="435" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="435" SizeChanged="Window_SizeChanged" KeyDown="keyboard_game_KeyDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="83"/>
@@ -14,10 +14,10 @@
         </Grid.RowDefinitions>
         <Canvas Grid.Row="0" Background="LightSkyBlue">
             <Menu x:Name="menu1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="855" FontSize="14">
-                <MenuItem Header="Skins" Width="44">
-                    <MenuItem Header="Skin 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter"></MenuItem>
-                    <MenuItem Header="Skin 2" Click="Skin2_Click_1" x:Name="mi_1" MouseEnter="mi_1_MouseEnter"></MenuItem>
-                    <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter"></MenuItem>
+                <MenuItem Header="Skins" Width="44" x:Name="Skins_item" Click="Skins_item_Click">
+                    <MenuItem Header="Skin 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter" MouseLeave="mi_0_MouseLeave"></MenuItem>
+                    <MenuItem Header="Skin 2" Click="Skin2_Click_1" x:Name="mi_1" MouseEnter="mi_1_MouseEnter" MouseLeave="mi_1_MouseLeave"></MenuItem>
+                    <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter" MouseLeave="mi_2_MouseLeave"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Rules" x:Name="Rules_item" Click="Rules_item_Click"/>
             </Menu>
