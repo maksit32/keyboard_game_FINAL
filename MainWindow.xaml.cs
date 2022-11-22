@@ -82,6 +82,7 @@ namespace keyboard_prj
             //меняем background у других
             mi_1.Background = Brushes.White;
             mi_2.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
         }
 
         private void Skin2_Click_1(object sender, RoutedEventArgs e)
@@ -91,6 +92,7 @@ namespace keyboard_prj
             Resources = rd;
             mi_0.Background = Brushes.White;
             mi_2.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
         }
 
         private void Skin3_Click_2(object sender, RoutedEventArgs e)
@@ -100,6 +102,17 @@ namespace keyboard_prj
             Resources = rd;
             mi_0.Background = Brushes.White;
             mi_1.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
+        }
+
+        private void mi_3_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceDictionary rd = new ResourceDictionary();
+            rd.Source = new Uri("\\Skins\\dictionary_default.xaml", UriKind.Relative);
+            Resources = rd;
+            mi_0.Background = Brushes.White;
+            mi_1.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
         }
 
         private async void mi_0_MouseLeave(object sender, MouseEventArgs e)
@@ -109,6 +122,7 @@ namespace keyboard_prj
             mi_0.Background = Brushes.White;
             mi_1.Background = Brushes.White;
             mi_2.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
         }
 
         private async void mi_1_MouseLeave(object sender, MouseEventArgs e)
@@ -117,6 +131,7 @@ namespace keyboard_prj
             mi_0.Background = Brushes.White;
             mi_1.Background = Brushes.White;
             mi_2.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
         }
 
         private async void mi_2_MouseLeave(object sender, MouseEventArgs e)
@@ -125,6 +140,15 @@ namespace keyboard_prj
             mi_0.Background = Brushes.White;
             mi_1.Background = Brushes.White;
             mi_2.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
+        }
+        private async void mi_3_MouseLeave(object sender, MouseEventArgs e)
+        {
+            await Task.Delay(1000);
+            mi_0.Background = Brushes.White;
+            mi_1.Background = Brushes.White;
+            mi_2.Background = Brushes.White;
+            mi_3.Background = Brushes.White;
         }
         #endregion
 
@@ -161,6 +185,11 @@ namespace keyboard_prj
         private void mi_2_MouseEnter(object sender, MouseEventArgs e)
         {
             (sender as MenuItem).Background = Brushes.Green;
+        }
+
+        private void mi_3_MouseEnter(object sender, MouseEventArgs e)
+        {
+            (sender as MenuItem).Background = Brushes.Blue;
         }
         #endregion
 

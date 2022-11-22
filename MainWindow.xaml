@@ -18,6 +18,7 @@
                     <MenuItem Header="Skin 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter" MouseLeave="mi_0_MouseLeave"></MenuItem>
                     <MenuItem Header="Skin 2" Click="Skin2_Click_1" x:Name="mi_1" MouseEnter="mi_1_MouseEnter" MouseLeave="mi_1_MouseLeave"></MenuItem>
                     <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter" MouseLeave="mi_2_MouseLeave"></MenuItem>
+                    <MenuItem Header="Default Skin" x:Name="mi_3" Click="mi_3_Click" MouseEnter="mi_3_MouseEnter" MouseLeave="mi_3_MouseLeave"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Rules" x:Name="Rules_item" Click="Rules_item_Click"/>
             </Menu>
