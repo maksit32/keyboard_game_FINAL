@@ -27,9 +27,10 @@ namespace keyboard_prj
         public System.Windows.Threading.DispatcherTimer timer1 { get; set; }
         private int sec;
         private Random rand = new Random(); //рандом
-        private List<string> list_buttons; //массив клавиш
-        private Result result = new Result { fail = 0, score = 0 };
+        private Dictionary<string, int> list_buttons; //массив клавиш
+        private User result = new User { fail = 0, score = 0, Name=""};
         private bool IsPlaying = false;
+        private bool IsPressed = false;
 
         #region [Construct]
         public MainWindow()
@@ -53,6 +54,11 @@ namespace keyboard_prj
             create_list();
         }
 
+        private void keyboard_game_Loaded(object sender, RoutedEventArgs e)
+        {
+            enable_rb.IsChecked = true;
+        }
+
         //for menu
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -60,7 +66,7 @@ namespace keyboard_prj
         }
         private void create_list()
         {
-            this.list_buttons = new List<string>
+            this.list_buttons = new Dictionary<string, int>
             {
                 "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace",
                 "Tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
@@ -85,7 +91,7 @@ namespace keyboard_prj
             mi_3.Background = Brushes.White;
         }
 
-        private void Skin2_Click_1(object sender, RoutedEventArgs e)
+        private void Skin2_Click(object sender, RoutedEventArgs e)
         {
             ResourceDictionary rd = new ResourceDictionary();
             rd.Source = new Uri("\\Skins\\skin2.xaml", UriKind.Relative);
@@ -95,7 +101,7 @@ namespace keyboard_prj
             mi_3.Background = Brushes.White;
         }
 
-        private void Skin3_Click_2(object sender, RoutedEventArgs e)
+        private void Skin3_Click(object sender, RoutedEventArgs e)
         {
             ResourceDictionary rd = new ResourceDictionary();
             rd.Source = new Uri("\\Skins\\skin3.xaml", UriKind.Relative);
@@ -105,7 +111,7 @@ namespace keyboard_prj
             mi_3.Background = Brushes.White;
         }
 
-        private void mi_3_Click(object sender, RoutedEventArgs e)
+        private void Skin4_Click(object sender, RoutedEventArgs e)
         {
             ResourceDictionary rd = new ResourceDictionary();
             rd.Source = new Uri("\\Skins\\dictionary_default.xaml", UriKind.Relative);
@@ -245,11 +251,13 @@ namespace keyboard_prj
                 MessageBox.Show("Тамер выключен.", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 IsPlaying = false;
                 this.time_left.Content = $"Time left: 0 sec";
+                this.text_label.Content = "Клавиши, которые нужно нажать будут отображаться тут.";
             }
         }
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            IsPressed= false;
             sec--;
             if (sec <= 0)
             {
@@ -277,16 +285,19 @@ namespace keyboard_prj
         #region [Game]
         private void keyboard_game_KeyDown(object sender, KeyEventArgs e)
         {
-            if (IsPlaying)
+            if (IsPlaying && !IsPressed) //не нажата
             {
                 if (text_label.Content.ToString().ToLower().Contains(e.Key.ToString().ToLower()))
                 {
                     result.score += 20;
+                    this.score_label.Content = $"Score:  {result.score}";
                 }
                 else
                 {
                     result.fail++;
+                    this.fail_label.Content = $"Fail:  {result.fail}";
                 }
+                IsPressed = true; //нажат
             }
         }
 
@@ -300,5 +311,18 @@ namespace keyboard_prj
             animation.Duration = TimeSpan.FromMilliseconds(1000);
             this.Skins_item.BeginAnimation(OpacityProperty, animation);
         }
+
+        #region [Radiobuttons]
+        private void decline_rb_Checked(object sender, RoutedEventArgs e)
+        {
+            buttons_canvas.IsEnabled = false;
+        }
+
+        private void enable_rb_Checked(object sender, RoutedEventArgs e)
+        {
+            buttons_canvas.IsEnabled = true;
+        }
+        #endregion
+
     }
 }

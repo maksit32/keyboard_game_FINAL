@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:keyboard_prj"
         mc:Ignorable="d"
-        Title="Keyboard game" Height="435" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="435" SizeChanged="Window_SizeChanged" KeyDown="keyboard_game_KeyDown">
+        Title="Keyboard game" Height="435" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="435" SizeChanged="Window_SizeChanged" KeyDown="keyboard_game_KeyDown" Loaded="keyboard_game_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="83"/>
@@ -16,9 +16,9 @@
             <Menu x:Name="menu1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="855" FontSize="14">
                 <MenuItem Header="Skins" Width="44" x:Name="Skins_item" Click="Skins_item_Click">
                     <MenuItem Header="Skin 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter" MouseLeave="mi_0_MouseLeave"></MenuItem>
-                    <MenuItem Header="Skin 2" Click="Skin2_Click_1" x:Name="mi_1" MouseEnter="mi_1_MouseEnter" MouseLeave="mi_1_MouseLeave"></MenuItem>
-                    <MenuItem Header="Skin 3" Click="Skin3_Click_2" x:Name="mi_2" MouseEnter="mi_2_MouseEnter" MouseLeave="mi_2_MouseLeave"></MenuItem>
-                    <MenuItem Header="Default Skin" x:Name="mi_3" Click="mi_3_Click" MouseEnter="mi_3_MouseEnter" MouseLeave="mi_3_MouseLeave"></MenuItem>
+                    <MenuItem Header="Skin 2" Click="Skin2_Click" x:Name="mi_1" MouseEnter="mi_1_MouseEnter" MouseLeave="mi_1_MouseLeave"></MenuItem>
+                    <MenuItem Header="Skin 3" Click="Skin3_Click" x:Name="mi_2" MouseEnter="mi_2_MouseEnter" MouseLeave="mi_2_MouseLeave"></MenuItem>
+                    <MenuItem Header="Default Skin" x:Name="mi_3" Click="Skin4_Click" MouseEnter="mi_3_MouseEnter" MouseLeave="mi_3_MouseLeave"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="Rules" x:Name="Rules_item" Click="Rules_item_Click"/>
             </Menu>
@@ -34,32 +34,24 @@
 
         </Canvas>
         <Canvas Grid.Row="1" Margin="0,0,0 5" Background="#FFAAFFD1">
-            <TextBox x:Name="tb_enter" Height="20" Width="251" Canvas.Left="10" Canvas.Top="10" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <TextBox.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="0.024"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </TextBox.RenderTransform>
-            </TextBox>
-            <Label x:Name="text_label" Content="Клавиши, которые нужно нажать будут отображаться тут." Canvas.Left="332" Canvas.Top="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="417" Foreground="Red"/>
+            <Label x:Name="text_label" Content="Клавиши, которые нужно нажать будут отображаться тут." Canvas.Left="402" Canvas.Top="6" HorizontalAlignment="Left" VerticalAlignment="Top" Width="417" Foreground="Red"/>
+            <RadioButton x:Name="enable_rb" Content="Активировать клавиатуру" Canvas.Left="10" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center" IsChecked="False" Checked="enable_rb_Checked"/>
+            <RadioButton x:Name="decline_rb" Content="Выключить клавиатуру" Canvas.Left="204" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top" Checked="decline_rb_Checked"/>
         </Canvas>
-        <Canvas Grid.Row="2" Background="Wheat">
+        <Canvas Grid.Row="2" Background="Wheat" x:Name="buttons_canvas">
             <Button Content="`" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Other_buttons}"/>
-            <Button Content="1" Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="55" VerticalAlignment="Center" Style="{DynamicResource Number_buttons}"></Button>
+            <Button Content="1" Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="55" VerticalAlignment="Center" Style="{DynamicResource Number_buttons}"/>
             <Button Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="660" Content="=" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="605" VerticalAlignment="Center" Content="-" Style="{DynamicResource Other_buttons}"></Button>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="550" VerticalAlignment="Center" Content="0" Style="{DynamicResource Number_buttons}"></Button>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="495" VerticalAlignment="Center" Content="9" Style="{DynamicResource Number_buttons}"></Button>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="440" VerticalAlignment="Center" Content="8" Style="{DynamicResource Number_buttons}"></Button>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="385" VerticalAlignment="Center" Content="7" Style="{DynamicResource Number_buttons}"></Button>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="605" VerticalAlignment="Center" Content="-" Style="{DynamicResource Other_buttons}"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="550" VerticalAlignment="Center" Content="0" Style="{DynamicResource Number_buttons}"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="495" VerticalAlignment="Center" Content="9" Style="{DynamicResource Number_buttons}"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="440" VerticalAlignment="Center" Content="8" Style="{DynamicResource Number_buttons}"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="385" VerticalAlignment="Center" Content="7" Style="{DynamicResource Number_buttons}"/>
             <Button Width="50" Height="50" HorizontalAlignment="Center" Canvas.Left="330" VerticalAlignment="Top" Content="6" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="275" VerticalAlignment="Center" Content="5" Style="{DynamicResource Number_buttons}"></Button>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="220" VerticalAlignment="Center" Content="4" Style="{DynamicResource Number_buttons}"></Button>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="275" VerticalAlignment="Center" Content="5" Style="{DynamicResource Number_buttons}"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="220" VerticalAlignment="Center" Content="4" Style="{DynamicResource Number_buttons}"/>
             <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="165" VerticalAlignment="Top" Content="3" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="110" VerticalAlignment="Center" Content="2" Style="{DynamicResource Number_buttons}"></Button>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="110" VerticalAlignment="Center" Content="2" Style="{DynamicResource Number_buttons}"/>
             <Button Width="140" Height="50" HorizontalAlignment="Left" Canvas.Left="715" VerticalAlignment="Center" Content="Backspace" Style="{DynamicResource Controls_buttons}"/>
             <Button Width="85" Height="50" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Tab" Style="{DynamicResource Controls_buttons}"/>
             <Button Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="90" Canvas.Top="55" Content="q" Style="{DynamicResource Letter_buttons}"/>
