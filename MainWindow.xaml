@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:keyboard_prj"
         mc:Ignorable="d"
-        Title="Keyboard game" Height="435" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="435" SizeChanged="Window_SizeChanged" KeyDown="keyboard_game_KeyDown" Loaded="keyboard_game_Loaded">
+        Title="Клавиатурный тренажер" Height="435" Width="865" WindowStartupLocation="CenterScreen" MinWidth="865" MinHeight="435" SizeChanged="Window_SizeChanged" KeyDown="keyboard_game_KeyDown_WPF" Loaded="keyboard_game_Loaded" Closed="keyboard_game_Closed" Icon="/gameico.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="83"/>
@@ -14,23 +14,50 @@
         </Grid.RowDefinitions>
         <Canvas Grid.Row="0" Background="LightSkyBlue">
             <Menu x:Name="menu1" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="855" FontSize="14">
-                <MenuItem Header="Skins" Width="44" x:Name="Skins_item" Click="Skins_item_Click">
-                    <MenuItem Header="Skin 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter" MouseLeave="mi_0_MouseLeave"></MenuItem>
-                    <MenuItem Header="Skin 2" Click="Skin2_Click" x:Name="mi_1" MouseEnter="mi_1_MouseEnter" MouseLeave="mi_1_MouseLeave"></MenuItem>
-                    <MenuItem Header="Skin 3" Click="Skin3_Click" x:Name="mi_2" MouseEnter="mi_2_MouseEnter" MouseLeave="mi_2_MouseLeave"></MenuItem>
-                    <MenuItem Header="Default Skin" x:Name="mi_3" Click="Skin4_Click" MouseEnter="mi_3_MouseEnter" MouseLeave="mi_3_MouseLeave"></MenuItem>
+                <MenuItem Header="Скины" x:Name="Skins_item" Click="Skins_item_Click" Cursor="Hand">
+                    <MenuItem Header="Скин 1" Click="Skin1_Click" x:Name="mi_0" MouseEnter="mi_0_MouseEnter" MouseLeave="mi_0_MouseLeave"></MenuItem>
+                    <MenuItem Header="Скин 2" Click="Skin2_Click" x:Name="mi_1" MouseEnter="mi_1_MouseEnter" MouseLeave="mi_1_MouseLeave"></MenuItem>
+                    <MenuItem Header="Скин 3" Click="Skin3_Click" x:Name="mi_2" MouseEnter="mi_2_MouseEnter" MouseLeave="mi_2_MouseLeave"></MenuItem>
+                    <MenuItem Header="Скин по умолчанию" x:Name="mi_3" Click="Skin4_Click" MouseEnter="mi_3_MouseEnter" MouseLeave="mi_3_MouseLeave"></MenuItem>
                 </MenuItem>
-                <MenuItem Header="Rules" x:Name="Rules_item" Click="Rules_item_Click"/>
+                <MenuItem Header="Правила" x:Name="Rules_item" Click="Rules_item_Click" Cursor="Hand"/>
+                <MenuItem Click="name_menuitem_click" Cursor="Hand">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse x:Name="ellipce_item" Fill="Black" Width="10" Height="10"/>
+                            <TextBlock Text="Ввод имени " Margin="7,0,0,0" Cursor="Hand"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Click="music_click" Cursor="Hand">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="image_sound" Source="/stop.ico"/>
+                            <TextBlock x:Name="tb_music" Text="Отключить звук " Margin="7,0,0,0" Cursor="Hand"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem Click="social_mi_click" Margin="3,0,0,0" Cursor="Hand">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image x:Name="image_social" Source="/social.ico"/>
+                            <TextBlock Text="Обратная связь с автором" Margin="7,0,0,0" Cursor="Hand"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem x:Name="restart_mi" Header="Перезагрузка" Margin="10,0,0,0" Background="White" Foreground="#FF0300FF" BorderBrush="Red" Click="restart_mi_Click" Cursor="Hand"/>
             </Menu>
-            <Label x:Name="time_left" Content="Time left..." HorizontalAlignment="Left" Canvas.Top="27" VerticalAlignment="Center" Width="132" Canvas.Left="10"/>
-            <Label Canvas.Left="147" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="25">Speed: 0 char/s</Label>
-            <Label x:Name="fail_label" HorizontalAlignment="Left" Canvas.Left="329" VerticalAlignment="Top" Canvas.Top="27">Fails: 0</Label>
-            <Label HorizontalAlignment="Left" Canvas.Left="540" VerticalAlignment="Center" Canvas.Top="28" x:Name="label_d" Height="24" Width="110"></Label>
-            <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="683" Canvas.Top="31" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft" Maximum="5"/>
-            <Button x:Name="Start_b" Canvas.Left="589" Canvas.Top="57" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="Start_b_MouseEnter" Click="Start_b_Click">Start</Button>
-            <Button x:Name="End_b" Canvas.Left="744" Canvas.Top="57" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="End_b_MouseEnter_1" Click="End_b_Click">End</Button>
-            <Label Canvas.Left="451" Canvas.Top="28" x:Name="label_d_Copy" Content="Difficulty: " HorizontalAlignment="Left" VerticalAlignment="Center" Width="73"/>
-            <Label x:Name="score_label" Canvas.Left="329" Canvas.Top="53" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="time_left" Content="Времени осталось..." HorizontalAlignment="Center" Canvas.Top="25" VerticalAlignment="Top" Canvas.Left="6"/>
+            <Label x:Name="speed_label" Canvas.Left="200" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Top="25">Скорость: 0 char/s</Label>
+            <Label x:Name="fail_label" HorizontalAlignment="Center" Canvas.Left="358" VerticalAlignment="Top" Canvas.Top="25">Ошибок: 0</Label>
+            <Label HorizontalAlignment="Center" Canvas.Left="569" VerticalAlignment="Top" Canvas.Top="24" x:Name="label_d" Height="24" Width="110"></Label>
+            <Slider x:Name="slider_d" Cursor="Hand" Canvas.Left="683" Canvas.Top="29" HorizontalAlignment="Center" VerticalAlignment="Top" Width="150" TickPlacement="TopLeft" Maximum="5" ValueChanged="slider_d_ValueChanged"/>
+            <Button x:Name="Start_b" Canvas.Left="597" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="Start_b_MouseEnter" Click="Start_b_Click">Старт</Button>
+            <Button x:Name="End_b" Canvas.Left="744" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" MouseEnter="End_b_MouseEnter_1" Click="End_b_Click">Стоп</Button>
+            <Label Canvas.Left="480" Canvas.Top="25" x:Name="label_d_Copy" Content="Сложность: " HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Label x:Name="score_label" Canvas.Left="358" Canvas.Top="53" Content="Очков: 0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label x:Name="name_label" Content="Ваше имя: " Canvas.Top="54" Width="324" Canvas.Left="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <ProgressBar x:Name="prg_bar" Height="22" Width="125" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="454" Canvas.Top="56" Background="LightSkyBlue" BorderBrush="Black" Maximum="19"/>
 
         </Canvas>
         <Canvas Grid.Row="1" Margin="0,0,0 5" Background="#FFAAFFD1">
@@ -39,66 +66,66 @@
             <RadioButton x:Name="decline_rb" Content="Выключить клавиатуру" Canvas.Left="204" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top" Checked="decline_rb_Checked"/>
         </Canvas>
         <Canvas Grid.Row="2" Background="Wheat" x:Name="buttons_canvas">
-            <Button Content="`" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Other_buttons}"/>
-            <Button Content="1" Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="55" VerticalAlignment="Center" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="660" Content="=" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="605" VerticalAlignment="Center" Content="-" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="550" VerticalAlignment="Center" Content="0" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="495" VerticalAlignment="Center" Content="9" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="440" VerticalAlignment="Center" Content="8" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="385" VerticalAlignment="Center" Content="7" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Center" Canvas.Left="330" VerticalAlignment="Top" Content="6" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="275" VerticalAlignment="Center" Content="5" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="220" VerticalAlignment="Center" Content="4" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="165" VerticalAlignment="Top" Content="3" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="110" VerticalAlignment="Center" Content="2" Style="{DynamicResource Number_buttons}"/>
-            <Button Width="140" Height="50" HorizontalAlignment="Left" Canvas.Left="715" VerticalAlignment="Center" Content="Backspace" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="85" Height="50" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Tab" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="90" Canvas.Top="55" Content="q" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="145" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="w" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="200" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="e" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="255" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="r" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="310" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Content="t" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="365" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="y" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="420" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="u" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="475" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="i" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="530" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="o" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="585" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="p" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="640" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="[" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="695" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="]" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="105" Height="49" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="750" Content="\" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="115" Height="50" Canvas.Top="109" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Caps Lock" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="130" Height="51" Canvas.Top="109" Canvas.Left="725" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Enter" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="120" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="a" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="175" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="s" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="230" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="d" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="285" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="f" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="340" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="g" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="395" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="h" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="450" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="j" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="505" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="k" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="560" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="l" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="615" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content=";" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="670" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center" Content="'" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="145" Height="50" Canvas.Top="164" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Shift" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="155" Height="49" Canvas.Top="165" Canvas.Left="700" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Shift" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="150" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="z" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="205" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="x" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="260" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="c" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="315" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="v" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="370" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="b" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="425" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="n" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="480" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="m" Style="{DynamicResource Letter_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="535" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="," Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="590" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="." Style="{DynamicResource Other_buttons}"/>
-            <Button Width="50" Height="50" Canvas.Left="645" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="/" Style="{DynamicResource Other_buttons}"/>
-            <Button Width="265" Height="50" Canvas.Top="219" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="300" Content="Space" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="125" Height="50" Canvas.Top="219" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ctrl" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="80" Height="50" Canvas.Top="219" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="130" Content="Win" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="80" Height="50" Canvas.Top="219" Canvas.Left="215" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Alt" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="115" Height="50" Canvas.Top="219" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="740" Content="Ctrl" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="80" Height="50" Canvas.Top="219" Canvas.Left="655" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Win" Style="{DynamicResource Controls_buttons}"/>
-            <Button Width="80" Height="50" Canvas.Top="219" Canvas.Left="570" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Alt" Style="{DynamicResource Controls_buttons}"/>
+            <Button Content="`" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource Other_buttons}" Click="Button_Click" MouseLeave="Animation_button2"/>
+            <Button Content="1" Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="55" VerticalAlignment="Center" Style="{DynamicResource Number_buttons}" Click="Button_Click_1" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="660" Content="+" Style="{DynamicResource Other_buttons}" Click="Button_Click_12" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="605" VerticalAlignment="Center" Content="-" Style="{DynamicResource Other_buttons}" Click="Button_Click_11" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="550" VerticalAlignment="Center" Content="0" Style="{DynamicResource Number_buttons}" Click="Button_Click_10" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="495" VerticalAlignment="Center" Content="9" Style="{DynamicResource Number_buttons}" Click="Button_Click_9" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="440" VerticalAlignment="Center" Content="8" Style="{DynamicResource Number_buttons}" Click="Button_Click_8" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="385" VerticalAlignment="Center" Content="7" Style="{DynamicResource Number_buttons}" Click="Button_Click_7" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Center" Canvas.Left="330" VerticalAlignment="Top" Content="6" Style="{DynamicResource Number_buttons}" Click="Button_Click_6" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="275" VerticalAlignment="Center" Content="5" Style="{DynamicResource Number_buttons}" Click="Button_Click_5" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="220" VerticalAlignment="Center" Content="4" Style="{DynamicResource Number_buttons}" Click="Button_Click_4" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="165" VerticalAlignment="Top" Content="3" Style="{DynamicResource Number_buttons}" Click="Button_Click_3" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" Canvas.Left="110" VerticalAlignment="Center" Content="2" Style="{DynamicResource Number_buttons}" Click="Button_Click_2" MouseLeave="Animation_button2"/>
+            <Button Width="140" Height="50" HorizontalAlignment="Left" Canvas.Left="715" VerticalAlignment="Center" Content="Backspace" Style="{DynamicResource Controls_buttons}" Click="Button_Click_13" MouseLeave="Animation_button2"/>
+            <Button Width="85" Height="50" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Tab" Style="{DynamicResource Controls_buttons}" Click="Button_Click_14" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="90" Canvas.Top="55" Content="q" Style="{DynamicResource Letter_buttons}" Click="Button_Click_15" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="145" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="w" Style="{DynamicResource Letter_buttons}" Click="Button_Click_16" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="200" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="e" Style="{DynamicResource Letter_buttons}" Click="Button_Click_17" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="255" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="r" Style="{DynamicResource Letter_buttons}" Click="Button_Click_18" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="310" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Content="t" Style="{DynamicResource Letter_buttons}" Click="Button_Click_19" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="365" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="y" Style="{DynamicResource Letter_buttons}" Click="Button_Click_20" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="420" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="u" Style="{DynamicResource Letter_buttons}" Click="Button_Click_21" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="475" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="i" Style="{DynamicResource Letter_buttons}" Click="Button_Click_22" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="530" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="o" Style="{DynamicResource Letter_buttons}" Click="Button_Click_23" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="585" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="p" Style="{DynamicResource Letter_buttons}" Click="Button_Click_24" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="640" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="[" Style="{DynamicResource Other_buttons}" Click="Button_Click_25" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="695" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" Content="]" Style="{DynamicResource Other_buttons}" Click="Button_Click_26" MouseLeave="Animation_button2"/>
+            <Button Width="105" Height="49" Canvas.Top="55" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="750" Content="\" Style="{DynamicResource Other_buttons}" Click="Button_Click_27" MouseLeave="Animation_button2"/>
+            <Button Width="115" Height="50" Canvas.Top="109" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Caps Lock" Style="{DynamicResource Controls_buttons}" Click="Button_Click_28" MouseLeave="Animation_button2"/>
+            <Button Width="130" Height="51" Canvas.Top="109" Canvas.Left="725" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Enter" Style="{DynamicResource Controls_buttons}" Click="Button_Click_40" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="120" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="a" Style="{DynamicResource Letter_buttons}" Click="Button_Click_29" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="175" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="s" Style="{DynamicResource Letter_buttons}" Click="Button_Click_30" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="230" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="d" Style="{DynamicResource Letter_buttons}" Click="Button_Click_31" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="285" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="f" Style="{DynamicResource Letter_buttons}" Click="Button_Click_32" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="340" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="g" Style="{DynamicResource Letter_buttons}" Click="Button_Click_33" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="395" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="h" Style="{DynamicResource Letter_buttons}" Click="Button_Click_34" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="450" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="j" Style="{DynamicResource Letter_buttons}" Click="Button_Click_35" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="505" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="k" Style="{DynamicResource Letter_buttons}" Click="Button_Click_36" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="560" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content="l" Style="{DynamicResource Letter_buttons}" Click="Button_Click_37" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="615" Canvas.Top="109" HorizontalAlignment="Left" VerticalAlignment="Center" Content=";" Style="{DynamicResource Other_buttons}" Click="Button_Click_38" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="670" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Center" Content="'" Style="{DynamicResource Other_buttons}" Click="Button_Click_39" MouseLeave="Animation_button2"/>
+            <Button Width="145" Height="50" Canvas.Top="164" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Shift" Style="{DynamicResource Controls_buttons}" Click="Button_Click_41" MouseLeave="Animation_button2"/>
+            <Button Width="155" Height="49" Canvas.Top="165" Canvas.Left="700" HorizontalAlignment="Center" VerticalAlignment="Top" Content="Shift" Style="{DynamicResource Controls_buttons}" Click="Button_Click_52" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="150" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="z" Style="{DynamicResource Letter_buttons}" Click="Button_Click_42" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="205" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="x" Style="{DynamicResource Letter_buttons}" Click="Button_Click_43" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="260" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="c" Style="{DynamicResource Letter_buttons}" Click="Button_Click_44" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="315" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="v" Style="{DynamicResource Letter_buttons}" Click="Button_Click_45" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="370" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="b" Style="{DynamicResource Letter_buttons}" Click="Button_Click_46" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="425" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="n" Style="{DynamicResource Letter_buttons}" Click="Button_Click_47" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="480" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="m" Style="{DynamicResource Letter_buttons}" Click="Button_Click_48" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="535" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="," Style="{DynamicResource Other_buttons}" Click="Button_Click_49" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="590" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="." Style="{DynamicResource Other_buttons}" Click="Button_Click_50" MouseLeave="Animation_button2"/>
+            <Button Width="50" Height="50" Canvas.Left="645" Canvas.Top="164" HorizontalAlignment="Left" VerticalAlignment="Top" Content="/" Style="{DynamicResource Other_buttons}" Click="Button_Click_51" MouseLeave="Animation_button2"/>
+            <Button Width="265" Height="50" Canvas.Top="219" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="300" Content="Space" Style="{DynamicResource Controls_buttons}" Click="Button_Click_56" MouseLeave="Animation_button2"/>
+            <Button Width="125" Height="50" Canvas.Top="219" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Ctrl" Style="{DynamicResource Controls_buttons}" Click="Button_Click_53" MouseLeave="Animation_button2"/>
+            <Button Width="80" Height="50" Canvas.Top="219" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="130" Content="Win" Style="{DynamicResource Controls_buttons}" Click="Button_Click_54" MouseLeave="Animation_button2"/>
+            <Button Width="80" Height="50" Canvas.Top="219" Canvas.Left="215" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Alt" Style="{DynamicResource Controls_buttons}" Click="Button_Click_55" MouseLeave="Animation_button2"/>
+            <Button Width="115" Height="50" Canvas.Top="219" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="740" Content="Ctrl" Style="{DynamicResource Controls_buttons}" Click="Button_Click_59" MouseLeave="Animation_button2"/>
+            <Button Width="80" Height="50" Canvas.Top="219" Canvas.Left="655" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Win" Style="{DynamicResource Controls_buttons}" Click="Button_Click_58" MouseLeave="Animation_button2"/>
+            <Button Width="80" Height="50" Canvas.Top="219" Canvas.Left="570" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Alt" Style="{DynamicResource Controls_buttons}" Click="Button_Click_57" MouseLeave="Animation_button2"/>
         </Canvas>
     </Grid>
 </Window>

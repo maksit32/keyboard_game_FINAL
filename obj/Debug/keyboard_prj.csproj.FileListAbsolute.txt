@@ -37,3 +37,7 @@ C:\Users\korni\source\repos\lessons\keyboard_prj\bin\Debug\System.Text.Json.xml
 C:\Users\korni\source\repos\lessons\keyboard_prj\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\korni\source\repos\lessons\keyboard_prj\bin\Debug\System.ValueTuple.xml
 C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj.csproj.CopyComplete
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Skins\name_dictionary.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Name_form.g.cs
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\Name_form.baml
+C:\Users\korni\source\repos\lessons\keyboard_prj\obj\Debug\keyboard_prj_Content.g.cs

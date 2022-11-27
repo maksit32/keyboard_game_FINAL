@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace keyboard_prj
 {
-    internal class User
+    public class User
     {
         public int score { get; set; }
         public int fail { get; set; }
